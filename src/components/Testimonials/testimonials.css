@@ -1,0 +1,127 @@
+/* .container.testimonials__container{
+  width: 40%;
+  margin: 0 auto;              
+  display: flex;
+  flex-direction: column;      
+  align-items: center; 
+}
+
+.client__avatar{
+  width: 4rem;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  border: 0.4rem solid var(--color-bg-variant);
+}
+
+.testimonial{
+  background: var(--color-bg-variant);
+  text-align: center;
+  padding: 2rem;
+  border-radius: 2rem;
+  user-select: none;
+  width: 100%;               
+  max-width: 700px;           
+  margin: 2rem 0;  
+}
+
+.client_review{
+  color: var(--color-light);
+  font-weight: 300;
+  display: block;
+  width: 80%;
+  margin: 0.8rem auto 0;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .container.testimonials__container{
+    width: 60%;
+  }
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .container.testimonials__container{
+    width: var(--container-width-sm);
+  }
+  .client__review{
+    width: var(--container-width-sm);
+  }
+} */
+
+.testimonials__container {
+  padding: 2rem 0;
+  position: relative;
+}
+
+.testimonial {
+  background: var(--color-bg-variant);
+  text-align: center;
+  padding: 2rem;
+  border-radius: 2rem;
+  user-select: none;
+  margin: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.testimonial:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-primary); /* or any color you want */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  z-index: 10;
+}
+
+/* Move arrows further away from the image */
+.swiper-button-prev {
+  left: -6rem;  /* You can increase this to -7rem, -8rem if needed */
+}
+
+.swiper-button-next {
+  right: -6rem; /* Same as above */
+}
+
+/* Swiper pagination */
+.swiper-pagination {
+  bottom: -2.5rem !important;  /* move dots further down */
+}
+
+
+.swiper-pagination-bullet {
+  background: var(--color-primary);
+  opacity: 0.6;
+  transition: transform 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+
+/* ******** Media Queries (Medium devices) ******** */
+@media screen and (max-width: 1024px) {
+  .testimonials__container {
+    width: 60%;
+  }
+}
+
+/* ******** Media Queries (Small devices) ******** */
+@media screen and (max-width: 600px) {
+  .testimonials__container {
+    width: var(--container-width-sm);
+  }
+
+  .client_review {
+    width: var(--container-width-sm);
+  }
+}
