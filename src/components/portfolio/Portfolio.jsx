@@ -16,7 +16,7 @@ const Portfolio = () => {
       id: 1,
       image: IMG1,
       title: "Traveling Website",
-      description: " A sleek and responsive portfolio website to showcase projects and skills.",
+      description: "A sleek and responsive portfolio website to showcase projects and skills.",
       category: "Web Application",
       technologies: ["React"],
       github: "https://github.com/JamilAnsari786/Travelling_Website",
@@ -49,7 +49,7 @@ const Portfolio = () => {
       id: 4,
       image: IMG4,
       title: "MovieDb",
-      description:  "MovieDb is a web application that allows users to search for movies, view details, and explore popular films. It features a clean and intuitive interface, making it easy for users to find information about their favorite movies.",
+      description: "MovieDb is a web application that allows users to search for movies, view details, and explore popular films. It features a clean and intuitive interface, making it easy for users to find information about their favorite movies.",
       category: "Web Application",
       technologies: ["React", "API"],
       github: "https://github.com/JamilAnsari786/MovieDb",
@@ -197,12 +197,24 @@ const Portfolio = () => {
                   <img src={project.image} alt={project.title} />
                   <div className="card__overlay">
                     <div className="overlay__actions">
-                      <button className="action__btn">
+                      <a 
+                        href={project.demo}
+                        className="action__btn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <FaExternalLinkAlt />
-                      </button>
-                      <button className="action__btn">
+                      </a>
+                      <a 
+                        href={project.github}
+                        className="action__btn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <FaGithub />
-                      </button>
+                      </a>
                     </div>
                   </div>
                   {project.featured && (
