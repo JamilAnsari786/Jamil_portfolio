@@ -14,7 +14,7 @@ const Contact = () => {
     message: ''
   });
 
-  // Initialize EmailJS with your public key
+  // Initialize EmailJS
   emailjs.init('HPVFUKYArRpuwfxe7');
 
   const handleChange = (e) => {
@@ -28,37 +28,40 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Get form data from state
+    // These parameters will be sent to your EmailJS template
     const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      message: formData.message,
-      to_name: 'Jamil Ansari'
+      from_name: formData.name,        // Sender's name
+      from_email: formData.email,      // Sender's email
+      message: formData.message,       // Message content
+      to_name: 'Jamil Ansari',         // Your name (recipient)
+      to_email: 'jamilansari9320@gmail.com' // Your Gmail address
     };
 
+    console.log('Sending email with params:', templateParams); // Debug log
+
     emailjs.send(
-      'service_1cagtxu', 
-      'template_9v9c8hj', 
+      'service_1cagtxu',           // Your Service ID
+      'template_9v9c8hj',          // Your Template ID
       templateParams,
-      'HPVFUKYArRpuwfxe7'
+      'HPVFUKYArRpuwfxe7'          // Your Public Key
     )
     .then(
       (result) => {
-        console.log('SUCCESS!', result.text);
+        console.log('SUCCESS! Email sent to Gmail:', result.text);
         setIsSubmitting(false);
         setIsSubmitted(true);
-        setFormData({ name: '', email: '', message: '' }); // Reset form data
-        e.target.reset(); // Reset form fields
+        setFormData({ name: '', email: '', message: '' }); // Reset form
+        e.target.reset();
         
-        // Auto-hide success message after 5 seconds
+        // Hide success message after 5 seconds
         setTimeout(() => {
           setIsSubmitted(false);
         }, 5000);
       },
       (error) => {
-        console.log('FAILED...', error.text);
+        console.log('FAILED to send email:', error.text);
         setIsSubmitting(false);
-        alert('Failed to send message. Please try again.');
+        alert('Failed to send message. Please try again or contact directly via email.');
       }
     );
   };
@@ -174,8 +177,8 @@ const Contact = () => {
                 <div className="form__success">
                   <div className="success__icon">✓</div>
                   <div className="success__message">
-                    <h4>Message Sent!</h4>
-                    <p>Thank you for reaching out. I'll get back to you soon.</p>
+                    <h4>Message Sent Successfully!</h4>
+                    <p>I've received your message and will get back to you soon.</p>
                   </div>
                 </div>
               )}
