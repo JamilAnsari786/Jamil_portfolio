@@ -20,14 +20,14 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return (
-      <div className="loading-screen">
-        <div className="spinner"></div>
-        <h3 className="loading-text">Loading Portfolio...</h3>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="loading-screen">
+  //       <div className="spinner"></div>
+  //       <h3 className="loading-text">Loading Portfolio...</h3>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="App">
