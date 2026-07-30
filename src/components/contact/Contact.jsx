@@ -36,8 +36,8 @@ const Contact = () => {
     {
       icon: <MdOutlineEmail className="contact__icon" />,
       title: "Email",
-      value: "jamilansari828@gmail.com",
-      link: "mailto:jamilansari828@gmail.com",
+      value: "jamilansari9320@gmail.com",
+      link: "mailto:jamilansari9320@gmail.com",
       description: "Send me an email anytime",
       color: "#4ade80"
     },
