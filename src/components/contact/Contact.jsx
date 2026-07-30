@@ -1,35 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./contact.css";
 import { MdOutlineEmail, MdLocationOn, MdPhone } from "react-icons/md";
 import { FaInstagram, FaLinkedin, FaGithub, FaPaperPlane } from "react-icons/fa";
-import { useRef } from 'react';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const form = useRef();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  // Initialize EmailJS with your public key
+  emailjs.init('HPVFUKYArRpuwfxe7');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    emailjs
-      .sendForm('service_1cagtxu', 'template_9v9c8hj', form.current, {
-        publicKey: 'HPVFUKYArRpuwfxe7',
-      })
-      .then(
-        () => {
-          setIsSubmitting(false);
-          setIsSubmitted(true);
-          e.target.reset();
-          setTimeout(() => setIsSubmitted(false), 5000);
-        },
-        (error) => {
-          setIsSubmitting(false);
-          console.log('FAILED...', error.text);
-        }
-      );
+    // Get form data from state
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+      to_name: 'Jamil Ansari'
+    };
+
+    emailjs.send(
+      'service_1cagtxu', 
+      'template_9v9c8hj', 
+      templateParams,
+      'HPVFUKYArRpuwfxe7'
+    )
+    .then(
+      (result) => {
+        console.log('SUCCESS!', result.text);
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', message: '' }); // Reset form data
+        e.target.reset(); // Reset form fields
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      },
+      (error) => {
+        console.log('FAILED...', error.text);
+        setIsSubmitting(false);
+        alert('Failed to send message. Please try again.');
+      }
+    );
   };
 
   const contactMethods = [
@@ -157,6 +188,8 @@ const Contact = () => {
                     placeholder=" " 
                     required 
                     className="form__input"
+                    value={formData.name}
+                    onChange={handleChange}
                   />
                   <label className="form__label">Your Full Name</label>
                   <div className="input__underline"></div>
@@ -171,6 +204,8 @@ const Contact = () => {
                     placeholder=" " 
                     required 
                     className="form__input"
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                   <label className="form__label">Your Email Address</label>
                   <div className="input__underline"></div>
@@ -185,6 +220,8 @@ const Contact = () => {
                     placeholder=" " 
                     required 
                     className="form__input form__textarea"
+                    value={formData.message}
+                    onChange={handleChange}
                   ></textarea>
                   <label className="form__label">Your Message</label>
                   <div className="input__underline"></div>
